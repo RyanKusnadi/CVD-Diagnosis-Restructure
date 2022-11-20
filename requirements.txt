@@ -1,5 +1,6 @@
-﻿experta==1.9.4
+python==3.9
+experta==1.9.4
 fastapi[all]==0.87.0
 numpy==1.23.4
 pandas
-gunicorn
+
