@@ -205,7 +205,7 @@ def diagnose_disease(form_dictionary:dict):
     for i in form_dictionary.keys():
         if i != "racial_identity":
             if type(form_dictionary[i]) != int:
-                form_dictionary[i] = int(form_dictionary)
+                form_dictionary[i] = int(form_dictionary[i])
     return expert_system.diagnose(form_dictionary)
 
 class FormData(BaseModel):
