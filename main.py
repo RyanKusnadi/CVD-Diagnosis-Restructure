@@ -59,10 +59,6 @@ models = [rfc, dtc, knc, sgd]
 
 class CVDExpertSystem(KnowledgeEngine):
     def diagnose(self, form_dictionary):
-        for i in form_dictionary.keys:
-            if i != "racial_identity":
-                form_dictionary[i] = int(form_dictionary[i])
-        self.reset()
         _overweight = ((form_dictionary["weight"]/((form_dictionary["height"]/100)**2))>25)
         _active = form_dictionary["active"]==1
         _above_50 = form_dictionary["age"]>50
@@ -71,7 +67,7 @@ class CVDExpertSystem(KnowledgeEngine):
         _smoking = form_dictionary["smoke"]==1
         _high_cholesterol = form_dictionary["cholesterol"]>1
         _diabetes = form_dictionary["gluc"]>1
-        _racially_african = form_dictionary["racial_identity"]=="african"
+        _racially_african = form_dictionary["racial_identity"]==1
         self.declare(Fact(overweight = _overweight))
         self.declare(Fact(active = _active))
         self.declare(Fact(above_50 = _above_50))
@@ -206,6 +202,10 @@ def predict_risk(form_dictionary:dict):
     return {"number_of_positive": positive, "number_of_model":number_of_model}
 
 def diagnose_disease(form_dictionary:dict):
+    for i in form_dictionary.keys():
+        if i != "racial_identity":
+            if type(form_dictionary[i]) != int:
+                form_dictionary[i] = int(form_dictionary)
     return expert_system.diagnose(form_dictionary)
 
 class FormData(BaseModel):
