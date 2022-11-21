@@ -59,6 +59,9 @@ models = [rfc, dtc, knc, sgd]
 
 class CVDExpertSystem(KnowledgeEngine):
     def diagnose(self, form_dictionary):
+        for i in form_dictionary.keys:
+            if i != "racial_identity":
+                form_dictionary[i] = int(form_dictionary[i])
         self.reset()
         _overweight = ((form_dictionary["weight"]/((form_dictionary["height"]/100)**2))>25)
         _active = form_dictionary["active"]==1
