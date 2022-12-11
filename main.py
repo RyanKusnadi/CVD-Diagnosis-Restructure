@@ -183,7 +183,7 @@ expert_system = CVDExpertSystem()
 
 @app.get("/")
 def hello():
-    return {"message":"test"}
+    return {"message":"access <URL>/diagnose/ to access diagnosis api."}
 
 @app.post("/diagnose/")
 async def diagnose(form_dictionary:dict):
